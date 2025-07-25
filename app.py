@@ -34,21 +34,21 @@ if uploaded_file:
         st.subheader("Sentiment Distribution")
         counts = df["Sentiment"].value_counts()
 
-        # 极小柱状图及字体
-        fig_bar, ax_bar = plt.subplots(figsize=(1.25, 1))  # 更小尺寸
+        # 小尺寸但清晰字体
+        fig_bar, ax_bar = plt.subplots(figsize=(1.25, 1))
         sns.barplot(x=counts.index, y=counts.values, ax=ax_bar)
-        ax_bar.set_ylabel("Count", fontsize=3)
-        ax_bar.set_xlabel("Sentiment", fontsize=3)
-        ax_bar.tick_params(axis='x', labelsize=3)
-        ax_bar.tick_params(axis='y', labelsize=3)
-        st.pyplot(fig_bar)
+        ax_bar.set_ylabel("Count", fontsize=6)
+        ax_bar.set_xlabel("Sentiment", fontsize=6)
+        ax_bar.tick_params(axis='x', labelsize=6)
+        ax_bar.tick_params(axis='y', labelsize=6)
+        st.pyplot(fig_bar, clear_figure=True)
 
         st.subheader("Pie Chart")
-        fig1, ax1 = plt.subplots(figsize=(0.625, 0.625))  # 极小饼图
+        fig1, ax1 = plt.subplots(figsize=(0.625, 0.625), dpi=200)  # 提高dpi使字体清晰
         wedges, texts, autotexts = ax1.pie(
-            counts, labels=counts.index, autopct="%1.1f%%", startangle=90, textprops={'fontsize': 3})
+            counts, labels=counts.index, autopct="%1.1f%%", startangle=90, textprops={'fontsize': 6})
         ax1.axis("equal")
-        st.pyplot(fig1)
+        st.pyplot(fig1, clear_figure=True)
 
         st.subheader("Word Cloud (Positive & Negative)")
         positive_text = " ".join(df[df["Sentiment"]=="Positive"][review_col].dropna())
