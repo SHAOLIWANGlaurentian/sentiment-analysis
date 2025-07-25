@@ -33,10 +33,15 @@ if uploaded_file:
 
         st.subheader("Sentiment Distribution")
         counts = df["Sentiment"].value_counts()
-        st.bar_chart(counts)
+
+        # 缩小柱状图显示尺寸
+        fig_bar, ax_bar = plt.subplots(figsize=(2.5, 2))  # 原始尺寸约5x4，现在缩小50%
+        sns.barplot(x=counts.index, y=counts.values, ax=ax_bar)
+        ax_bar.set_ylabel("Count")
+        st.pyplot(fig_bar)
 
         st.subheader("Pie Chart")
-        fig1, ax1 = plt.subplots(figsize=(2.5, 2.5))  # 更小的图像尺寸
+        fig1, ax1 = plt.subplots(figsize=(1.25, 1.25))  # 再次缩小为原始 1/2 尺寸
         ax1.pie(counts, labels=counts.index, autopct="%1.1f%%", startangle=90)
         ax1.axis("equal")
         st.pyplot(fig1)
