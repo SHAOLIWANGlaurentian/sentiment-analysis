@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 from textblob import TextBlob
@@ -35,7 +36,7 @@ if uploaded_file:
         st.bar_chart(counts)
 
         st.subheader("Pie Chart")
-        fig1, ax1 = plt.subplots()
+        fig1, ax1 = plt.subplots(figsize=(4, 4))  # 控制图像大小
         ax1.pie(counts, labels=counts.index, autopct="%1.1f%%", startangle=90)
         ax1.axis("equal")
         st.pyplot(fig1)
