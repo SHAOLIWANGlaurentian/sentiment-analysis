@@ -34,19 +34,19 @@ if uploaded_file:
         st.subheader("Sentiment Distribution")
         counts = df["Sentiment"].value_counts()
 
-        # 缩小柱状图及字体
-        fig_bar, ax_bar = plt.subplots(figsize=(2.5, 2))  # 原始尺寸约5x4
+        # 极小柱状图及字体
+        fig_bar, ax_bar = plt.subplots(figsize=(1.25, 1))  # 更小尺寸
         sns.barplot(x=counts.index, y=counts.values, ax=ax_bar)
-        ax_bar.set_ylabel("Count", fontsize=6)
-        ax_bar.set_xlabel("Sentiment", fontsize=6)
-        ax_bar.tick_params(axis='x', labelsize=6)
-        ax_bar.tick_params(axis='y', labelsize=6)
+        ax_bar.set_ylabel("Count", fontsize=3)
+        ax_bar.set_xlabel("Sentiment", fontsize=3)
+        ax_bar.tick_params(axis='x', labelsize=3)
+        ax_bar.tick_params(axis='y', labelsize=3)
         st.pyplot(fig_bar)
 
         st.subheader("Pie Chart")
-        fig1, ax1 = plt.subplots(figsize=(1.25, 1.25))  # 原始尺寸约2.5x2.5
+        fig1, ax1 = plt.subplots(figsize=(0.625, 0.625))  # 极小饼图
         wedges, texts, autotexts = ax1.pie(
-            counts, labels=counts.index, autopct="%1.1f%%", startangle=90, textprops={'fontsize': 6})
+            counts, labels=counts.index, autopct="%1.1f%%", startangle=90, textprops={'fontsize': 3})
         ax1.axis("equal")
         st.pyplot(fig1)
 
@@ -57,11 +57,11 @@ if uploaded_file:
         col1, col2 = st.columns(2)
         with col1:
             st.write("Positive")
-            wc1 = WordCloud(width=400, height=300, background_color="white").generate(positive_text)
+            wc1 = WordCloud(width=200, height=150, background_color="white").generate(positive_text)
             st.image(wc1.to_array())
         with col2:
             st.write("Negative")
-            wc2 = WordCloud(width=400, height=300, background_color="white").generate(negative_text)
+            wc2 = WordCloud(width=200, height=150, background_color="white").generate(negative_text)
             st.image(wc2.to_array())
     else:
         st.error("❌ Excel must contain columns named 'Review' and 'Rating'")
